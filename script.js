@@ -1,6 +1,18 @@
 let noCount = 0;
 
-function openGift() {
+const message = `Lovey,
+
+I know I hurt you, and I'm deeply sorry for that. Even though it wasn't my intention, it doesn't change the fact that I did — and I own that completely.
+
+I know it looks like I lied to you. And I understand why it feels that way. But I want you to know the truth — I got too comfortable. Comfortable enough to think that because there was nothing going on, it was okay not to mention it. I forgot to tell you, or I just didn't think to bring it up anymore. And that was wrong. That's the only reason, Lovey. Nothing more, nothing hidden.
+
+I will never cheat on you. I will never lie to you. You deserve to know everything, and I failed at that — not because I wanted to hide something, but because I was careless with something that mattered to you. And that matters to me now more than ever.
+
+Through all of this, I love you. With everything I have. That has never changed, and it never will.
+
+I'm sorry, Lovey. I really am.`;
+
+function openLetter() {
   const overlay = document.getElementById('overlay');
   const mainPage = document.getElementById('mainPage');
 
@@ -9,103 +21,95 @@ function openGift() {
   setTimeout(() => {
     overlay.style.display = 'none';
     mainPage.classList.add('visible');
+    window.scrollTo(0, 0);
     spawnPetals();
 
     const music = document.getElementById('bgMusic');
-    music.play();
+    music.volume = 0.5;
+    music.play().catch(() => {});
+
     setTimeout(() => {
-    document.getElementById('nowPlaying').classList.add('show');
+      document.getElementById('nowPlaying').classList.add('show');
     }, 800);
 
-    // Bloom the bouquet
-    document.getElementById('bouquetSvg').classList.add('bloom');
-
-    // Typewriter effect
-    const message = `Lovey,\n\nSorry sa mga awayan natin. I know, minsan nagiging sobrang sakit talaga ako ng ulo mo — 'yung tipong hindi mo na maintindihan kung bakit ganito o ganyan ako. 'Yung tipong naiisip mo na 'yung mga bagay na hindi mo naman talaga gustong pag-isipan.\n\nNakikita ko kung gaano kadalas kita napapagod, and even if hindi ko lagi nasasabi out loud, nararamdaman ko rin 'yun.\n\nI know na marami na akong beses na nangako na magbabago, na babawi — and I get it if it sounds the same every time. I know na nakakabawi ako sa mga ibang bagay kung saan ako nagkulang pero hindi ko rin titigilan. Every time na nagkakamali ako, babalik pa rin ako at aayusin, kahit gaano katagal 'yun.\n\nI know may mga bagay pa akong kailangan ayusin sa sarili ko, and I'm not saying it's always going to be easy. But you know na ginagawa ko ang lahat para mapatunayan sayo na bumabawi ako sa'yo. Alam kong nakikita mo 'yun — and I hope you never stop seeing it.\n\nAyun lang, Lovey. Sorry ulit lovey ko.\n\n— Karl`;
-
     const el = document.getElementById('typewriter-text');
+    const cursor = document.getElementById('cursor');
     let i = 0;
-    const speed = 28;
+    const speed = 22;
 
     function type() {
       if (i < message.length) {
         el.textContent += message[i];
         i++;
         setTimeout(type, speed);
+      } else {
+        cursor.classList.add('done');
       }
     }
 
-    setTimeout(type, 600);
-  }, 800);
+    setTimeout(type, 500);
+  }, 900);
 }
 
 function toggleMusic() {
   const music = document.getElementById('bgMusic');
-  const btn = document.getElementById('playPauseBtn');
+  const playIcon = document.getElementById('playIcon');
+  const pauseIcon = document.getElementById('pauseIcon');
+
   if (music.paused) {
     music.play();
-    btn.textContent = '⏸';
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'block';
   } else {
     music.pause();
-    btn.textContent = '▶';
+    playIcon.style.display = 'block';
+    pauseIcon.style.display = 'none';
   }
 }
 
 function runAway() {
   noCount++;
   const noBtn = document.getElementById('noBtn');
-  const memeOverlay = document.getElementById('memeOverlay');
-  const memeImg = document.getElementById('memeImg');
-  const shrinkCaption = document.getElementById('shrinkCaption');
+  const caption = document.getElementById('shrinkCaption');
 
-  if (noCount <= 3) {
-    const memes = ['crying1.jpg', 'crying2.jpg', 'crying3.jpg'];
-    memeImg.src = memes[noCount - 1];
-    memeOverlay.classList.remove('show');
-    void memeOverlay.offsetWidth;
-    memeOverlay.classList.add('show');
+  noBtn.classList.remove('shake');
+  void noBtn.offsetWidth;
 
-    noBtn.classList.remove('shake');
-    void noBtn.offsetWidth;
+  if (noCount === 1) {
     noBtn.classList.add('shake');
+    noBtn.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
+    noBtn.style.transform = 'scale(0.85)';
+    noBtn.style.opacity = '0.7';
+  }
 
-    setTimeout(() => {
-      memeOverlay.classList.remove('show');
-    }, 2000);
+  if (noCount === 2) {
+    noBtn.classList.add('shake');
+    noBtn.style.transform = 'scale(0.6)';
+    noBtn.style.opacity = '0.45';
+  }
+
+  if (noCount === 3) {
+    noBtn.style.transform = 'scale(0.35)';
+    noBtn.style.opacity = '0.25';
   }
 
   if (noCount === 4) {
-    shrinkCaption.textContent = 'i-open mo na kasi!';
-    noBtn.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
-    noBtn.style.transform = 'scale(0.5)';
-    noBtn.style.opacity = '0.5';
-  }
-
-  if (noCount === 5) {
-    shrinkCaption.textContent = 'na para bang akala mo naman may magagawa ka pag nag no ka 🙄';
-    noBtn.style.transform = 'scale(0.2)';
-    noBtn.style.opacity = '0.2';
-  }
-
-  if (noCount === 6) {
-    shrinkCaption.textContent = 'aray mo, PAKAK! mag yes na kasi!';
+    caption.textContent = '';
     noBtn.style.transform = 'scale(0)';
     noBtn.style.opacity = '0';
     noBtn.style.pointerEvents = 'none';
-    setTimeout(() => {
-      noBtn.style.display = 'none';
-    }, 400);
+    setTimeout(() => { noBtn.style.display = 'none'; }, 400);
   }
 }
 
 function spawnPetals() {
   const container = document.getElementById('petals');
-  for (let i = 0; i < 35; i++) {
+  for (let i = 0; i < 30; i++) {
     const p = document.createElement('div');
     p.classList.add('petal');
     p.style.left = Math.random() * 100 + 'vw';
-    p.style.animationDuration = (Math.random() * 4 + 3) + 's';
-    p.style.animationDelay = (Math.random() * 5) + 's';
+    p.style.animationDuration = (Math.random() * 5 + 4) + 's';
+    p.style.animationDelay = (Math.random() * 6) + 's';
     container.appendChild(p);
   }
 }

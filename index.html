@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For u, Lovey</title>
+  <title>for you, Lovey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -11,117 +14,72 @@
   <div class="petals" id="petals"></div>
 
   <audio id="bgMusic" loop>
-  <source src="audios/Sleeping With Sirens - James Dean & Audrey Hepburn (Acoustic version).mp3" type="audio/mpeg">
-    </audio>
+    <source src="audios/two-is-better-than-one.mp3" type="audio/mpeg">
+  </audio>
 
   <!-- Entrance Overlay -->
   <div class="overlay" id="overlay">
-    <div class="overlay-box">
-      <div class="gift-box">💌</div>
-      <h2>Kaloyski sent you something special...</h2>
-      <p>Will you open it?</p>
+    <div class="overlay-inner">
+      <p class="from-label">from Karl</p>
+      <h1 class="overlay-title">i owe you this.</h1>
+      <p class="overlay-sub">will you hear me out?</p>
       <div class="btn-group">
-        <button class="btn-yes" onclick="openGift()">Yes</button>
-        <button class="btn-no" id="noBtn" onclick="runAway()">No</button>
-        </div>
-        <p class="shrink-caption" id="shrinkCaption"></p>
+        <button class="btn-yes" onclick="openLetter()">oo naman</button>
+        <button class="btn-no" id="noBtn" onclick="runAway()">naur!</button>
+      </div>
+      <p class="shrink-caption" id="shrinkCaption"></p>
     </div>
   </div>
 
   <!-- Main Page -->
   <main class="main-page" id="mainPage">
 
-    <h1>For u, Step</h1>
+    <header class="page-header">
+      <p class="header-eyebrow">for you</p>
+      <h2 class="header-title">Lovey</h2>
+    </header>
 
-    <div class="bouquet-wrapper">
-<svg class="bouquet-svg" id="bouquetSvg" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+    <section class="letter-section">
+      <div class="letter-card">
+        <p id="typewriter-text"></p>
+        <span class="cursor" id="cursor">|</span>
+      </div>
+    </section>
 
-  <!-- Wrap -->
-  <g id="b-wrap">
-    <path d="M80 210 Q100 200 120 210 L115 270 Q100 275 85 270 Z" fill="#f9a8c9"/>
-    <path d="M88 212 Q100 205 112 212 L109 255 Q100 258 91 255 Z" fill="#fbc8db"/>
-    <path d="M92 220 Q100 240 108 220" stroke="#e91e8c" stroke-width="1.5" fill="none" opacity="0.5"/>
-  </g>
-
-  <!-- Stems -->
-  <g id="b-stems">
-    <line x1="100" y1="208" x2="100" y2="155" stroke="#81c784" stroke-width="2" stroke-linecap="round"/>
-    <line x1="100" y1="200" x2="78" y2="155" stroke="#81c784" stroke-width="1.5" stroke-linecap="round"/>
-    <line x1="100" y1="200" x2="122" y2="155" stroke="#81c784" stroke-width="1.5" stroke-linecap="round"/>
-    <line x1="100" y1="195" x2="62" y2="162" stroke="#81c784" stroke-width="1.2" stroke-linecap="round"/>
-    <line x1="100" y1="195" x2="138" y2="162" stroke="#81c784" stroke-width="1.2" stroke-linecap="round"/>
-    <!-- leaves -->
-    <ellipse cx="88" cy="178" rx="10" ry="5" fill="#a5d6a7" transform="rotate(-30 88 178)"/>
-    <ellipse cx="112" cy="178" rx="10" ry="5" fill="#a5d6a7" transform="rotate(30 112 178)"/>
-  </g>
-
-  <!-- Rose center -->
-  <g id="b-rose-center">
-    <circle cx="100" cy="135" r="18" fill="#e91e8c"/>
-    <circle cx="100" cy="135" r="12" fill="#c2185b"/>
-    <circle cx="100" cy="135" r="6" fill="#ad1457"/>
-    <ellipse cx="100" cy="125" rx="8" ry="5" fill="#e91e8c" opacity="0.6"/>
-    <ellipse cx="110" cy="132" rx="8" ry="5" fill="#e91e8c" opacity="0.6" transform="rotate(60 110 132)"/>
-    <ellipse cx="90" cy="132" rx="8" ry="5" fill="#e91e8c" opacity="0.6" transform="rotate(-60 90 132)"/>
-  </g>
-
-  <!-- Side flower left -->
-  <g id="b-flower-left">
-    <circle cx="72" cy="148" r="12" fill="#f48fb1"/>
-    <circle cx="72" cy="148" r="7" fill="#e91e8c"/>
-    <ellipse cx="72" cy="138" rx="6" ry="4" fill="#f48fb1" opacity="0.7"/>
-    <ellipse cx="80" cy="144" rx="6" ry="4" fill="#f48fb1" opacity="0.7" transform="rotate(60 80 144)"/>
-    <ellipse cx="64" cy="144" rx="6" ry="4" fill="#f48fb1" opacity="0.7" transform="rotate(-60 64 144)"/>
-  </g>
-
-  <!-- Side flower right -->
-  <g id="b-flower-right">
-    <circle cx="128" cy="148" r="12" fill="#f48fb1"/>
-    <circle cx="128" cy="148" r="7" fill="#e91e8c"/>
-    <ellipse cx="128" cy="138" rx="6" ry="4" fill="#f48fb1" opacity="0.7"/>
-    <ellipse cx="136" cy="144" rx="6" ry="4" fill="#f48fb1" opacity="0.7" transform="rotate(60 136 144)"/>
-    <ellipse cx="120" cy="144" rx="6" ry="4" fill="#f48fb1" opacity="0.7" transform="rotate(-60 120 144)"/>
-  </g>
-
-  <!-- Small accent flowers -->
-  <g id="b-accents">
-    <circle cx="58" cy="162" r="8" fill="#fce4ec"/>
-    <circle cx="58" cy="162" r="4" fill="#f48fb1"/>
-    <circle cx="142" cy="162" r="8" fill="#fce4ec"/>
-    <circle cx="142" cy="162" r="4" fill="#f48fb1"/>
-    <circle cx="100" cy="118" r="5" fill="#fce4ec"/>
-    <circle cx="100" cy="118" r="2.5" fill="#f48fb1"/>
-  </g>
-
-</svg>
-    </div>
-
-<div class="message-card">
-  <p id="typewriter-text"></p>
-</div>
-
-    <div class="photos">
-      <img src="photos/photo1.jpg" alt="us" />
-      <img src="photos/photo2.jpg" alt="us" />
-      <img src="photos/photo3.jpg" alt="us" />
-      <img src="photos/photo4.jpg" alt="us" />
-      <img src="photos/photo5.jpg" alt="us" />
-    </div>
+    <section class="photos-section">
+      <p class="section-label">🤍</p>
+      <div class="photos">
+        <div class="photo-slot"><img src="photos/photo1.jpg" alt="us" /></div>
+        <div class="photo-slot"><img src="photos/photo2.jpg" alt="us" /></div>
+        <div class="photo-slot"><img src="photos/photo3.jpg" alt="us" /></div>
+        <div class="photo-slot"><img src="photos/photo4.jpg" alt="us" /></div>
+        <div class="photo-slot"><img src="photos/photo5.jpg" alt="us" /></div>
+        <div class="photo-slot"><img src="photos/photo6.jpg" alt="us" /></div>
+        <div class="photo-slot"><img src="photos/photo7.jpg" alt="us" /></div>
+        <div class="photo-slot"><img src="photos/photo8.jpg" alt="us" /></div>
+        <div class="photo-slot"><img src="photos/photo9.jpg" alt="us" /></div>
+        <div class="photo-slot"><img src="photos/photo10.jpg" alt="us" /></div>
+        <div class="photo-slot"><img src="photos/photo11.jpg" alt="us" /></div>
+        <div class="photo-slot"><img src="photos/photo12.jpg" alt="us" /></div>
+      </div>
+    </section>
 
     <div class="now-playing" id="nowPlaying">
-    <button class="play-pause-btn" id="playPauseBtn" onclick="toggleMusic()">⏸</button>
-    <span class="note">♪</span>
-    <div class="track-info">
-        <span class="track-title">James Dean & Audrey Hepburn</span>
-        <span class="track-artist">Sleeping With Sirens — Acoustic</span>
+      <button class="play-pause-btn" id="playPauseBtn" onclick="toggleMusic()">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="white" id="playIcon" style="display:none"><polygon points="2,1 11,6 2,11"/></svg>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="white" id="pauseIcon"><rect x="2" y="1" width="3" height="10"/><rect x="7" y="1" width="3" height="10"/></svg>
+      </button>
+      <div class="track-info">
+        <span class="track-title">Two Is Better Than One</span>
+        <span class="track-artist">Boys Like Girls ft. Taylor Swift</span>
+      </div>
     </div>
-    </div>
+
+    <footer class="page-footer">
+      <p>— Kaloys</p>
+    </footer>
 
   </main>
-
-  <div class="meme-overlay" id="memeOverlay">
-  <img id="memeImg" src="" alt="meme" />
-    </div>
 
   <script src="script.js"></script>
 </body>
